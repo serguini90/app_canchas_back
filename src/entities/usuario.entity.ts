@@ -21,6 +21,9 @@ export class Usuario {
     @Column({type:'varchar', name:'Correo'})
     correo: string;
 
+    @Column( { type: 'tinyint', width: 1, name:'IndicadorProveedor' } )
+    indicadorProveedor: boolean;
+
     @Column( { type: 'tinyint', width: 1, name:'IndicadorHabilitado' } )
     indicadorHabilitado: boolean;
 

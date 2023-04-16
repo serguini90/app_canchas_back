@@ -6,12 +6,15 @@ import { Usuario } from 'src/entities/usuario.entity';
 import { UsuarioDto } from 'src/dtos/usuario.dto';
 import { Tabla } from 'src/commons/tablas';
 import { JwtPayload } from 'src/models/jwt-payload';
+import { JwtService } from '@nestjs/jwt';
+import { ConfigService } from '@nestjs/config';
 
 @Injectable()
 export class UsuarioService {
 
   constructor(@InjectRepository(Usuario)
-  private readonly principalRepository: Repository<Usuario>) {
+  private readonly principalRepository: Repository<Usuario>,
+  private readonly jwtService: JwtService) {
   }
 
   create(usuario: UsuarioDto) {
@@ -64,6 +67,11 @@ export class UsuarioService {
     nuevoPayload.idUsuario = usuario.idUsuario;
     nuevoPayload.usuario = usuario.usuario;
     return nuevoPayload;
+  }
+
+  getJwtToken( payload: JwtPayload ): string {
+    const token = this.jwtService.sign({usuario: payload});
+    return token;
   }
 
 

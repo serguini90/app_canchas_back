@@ -1,18 +1,16 @@
 import { ApiProperty } from "@nestjs/swagger";
 
-export class UsuarioDto {
+export class CanchaDto {
+    @ApiProperty()
+    idCancha: string;
     @ApiProperty()
     idUsuario: string;
     @ApiProperty()
-    usuario: string;
+    cantidadJugadores: number;
     @ApiProperty()
-    password: string;
+    precio: number;
     @ApiProperty()
-    celular: string;
-    @ApiProperty()
-    correo: string;
-    @ApiProperty()
-    indicadorProveedor: boolean;
+    direccion: string;
     @ApiProperty()
     indicadorHabilitado: boolean;
 }

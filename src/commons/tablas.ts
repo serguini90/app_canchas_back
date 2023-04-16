@@ -1,7 +1,7 @@
 export enum Tabla {
-    USUARIOS = 'usuarios'
-}
-
-export enum Listas {
-    LISTAROL = 'listasroles'
+    USUARIOS = 'usuarios',
+    CANCHAS = 'canchas',
+    CANCHASHORARIOS = 'canchashorarios',
+    LISTASMEDIOSPAGOS = 'listasmediospagos',
+    RESERVAS = 'reservas'
 }

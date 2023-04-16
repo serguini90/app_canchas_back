@@ -1,18 +1,16 @@
 import { ApiProperty } from "@nestjs/swagger";
 
-export class UsuarioDto {
+export class ReservaDto {
+    @ApiProperty()
+    idReserva: string;
     @ApiProperty()
     idUsuario: string;
     @ApiProperty()
-    usuario: string;
+    fecha: Date;
     @ApiProperty()
-    password: string;
+    idCanchaHorario: string;
     @ApiProperty()
-    celular: string;
-    @ApiProperty()
-    correo: string;
-    @ApiProperty()
-    indicadorProveedor: boolean;
+    idMedioPago: string;
     @ApiProperty()
     indicadorHabilitado: boolean;
 }

@@ -7,6 +7,18 @@ import { MailerModule } from '@nestjs-modules/mailer';
 import { HandlebarsAdapter } from '@nestjs-modules/mailer/dist/adapters/handlebars.adapter';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { obtenerEntidades } from './commons/entidades.config';
+import { UsuarioController } from './controllers/usuario/usuario.controller';
+import { NotificacionService } from './services/notificacion.service';
+import { UsuarioService } from './services/usuario.service';
+import { JwtStrategy } from './strategies/jwt.strategy';
+import { CanchaService } from './services/cancha.service';
+import { CanchaHorarioService } from './services/cancha-horario.service';
+import { ReservaService } from './services/reserva.service';
+import { ListaMedioPagoService } from './services/lista-medio-pago.service';
+import { ListaMedioPagoController } from './controllers/lista-medio-pago/lista-medio-pago.controller';
+import { CanchaHorarioController } from './controllers/cancha-horario/cancha-horario.controller';
+import { CanchaController } from './controllers/cancha/cancha.controller';
+import { ReservaController } from './controllers/reserva/reserva.controller';
 
 @Module({
   imports: [
@@ -57,10 +69,10 @@ import { obtenerEntidades } from './commons/entidades.config';
           entities: obtenerEntidades()
         }),
         inject: [ConfigService],
-      })
-  
+      }),
+      TypeOrmModule.forFeature(obtenerEntidades()),
   ],
-  controllers: [],
-  providers: [],
+  controllers: [UsuarioController,ListaMedioPagoController, CanchaHorarioController, CanchaController, ReservaController],
+  providers: [NotificacionService,UsuarioService,JwtStrategy, CanchaService, CanchaHorarioService, ReservaService, ListaMedioPagoService]
 })
 export class AppModule {}
