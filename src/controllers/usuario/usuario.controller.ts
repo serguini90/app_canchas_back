@@ -62,12 +62,14 @@ export class UsuarioController {
       }
     
       @Post('validarDatosTelefonoCorreo')
+      @Public()
       async validarDatosUsuario(@Body() registro: ValidarDatosDto) {
         const existe = await this.userService.buscarUsuarioTelefonoCorreo(registro.correo, registro.celular, registro.idUsuario);
         return {estado: existe.length === 0};
       }
     
       @Post('validarUsuario')
+      @Public()
       async validarUsuario(@Body() registro: ValidarUsuarioDto) {
         const existe = await this.userService.buscarUsuarioPorNombre(registro?.usuario);
         return {estado: !existe};
