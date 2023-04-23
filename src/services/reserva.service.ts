@@ -1,6 +1,10 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import { Tabla } from 'src/commons/tablas';
 import { ReservaDto } from 'src/dtos/reserva.dto';
+import { CanchaHorario } from 'src/entities/cancha-horario.entity';
+import { Cancha } from 'src/entities/cancha.entity';
+import { ListaMedioPago } from 'src/entities/lista-medio-pago.entity';
 import { Reserva } from 'src/entities/reserva.entity';
 import { Repository } from 'typeorm';
 
@@ -26,6 +30,16 @@ export class ReservaService {
 
   findOne(id: string) {
     return this.principalRepository.findOneBy({idReserva: id});
+  }
+
+  findMisReservas(id: string) {
+    return this.principalRepository.createQueryBuilder(Tabla.RESERVAS)
+      .leftJoinAndMapOne(`${Tabla.RESERVAS}.${Tabla.LISTASMEDIOSPAGOS}`, ListaMedioPago, 'l1', `l1.IdLista=${Tabla.RESERVAS}.IdMedioPago`)
+      .leftJoinAndMapOne(`${Tabla.RESERVAS}.${Tabla.CANCHASHORARIOS}`, CanchaHorario, 'ch', `ch.IdCanchaHorario=${Tabla.RESERVAS}.IdCanchaHorario`)
+      .leftJoinAndMapOne(`${Tabla.CANCHASHORARIOS}.${Tabla.CANCHAS}`, Cancha, 'c', `c.IdCancha=ch.IdCancha`)
+      .where(`${Tabla.RESERVAS}.idUsuario = :idUsuario`, { idUsuario: id})
+      .andWhere(`DATE(${Tabla.RESERVAS}.fecha) >= DATE(NOW())`)
+      .getMany();
   }
 
   update(objeto: ReservaDto) {

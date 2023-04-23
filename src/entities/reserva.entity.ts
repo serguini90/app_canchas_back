@@ -1,5 +1,8 @@
+import { Exclude } from "class-transformer";
 import { Tabla } from "src/commons/tablas";
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { AfterLoad, AfterRecover, Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { ListaMedioPago } from "./lista-medio-pago.entity";
+import { CanchaHorario } from "./cancha-horario.entity";
 
 @Entity({name:Tabla.RESERVAS})
 export class Reserva {
@@ -21,4 +24,28 @@ export class Reserva {
 
     @Column( { type: 'tinyint', width: 1, name:'IndicadorHabilitado' } )
     indicadorHabilitado: boolean;
+
+    @Exclude()
+    listasmediospagos: ListaMedioPago;
+
+    @Exclude()
+    canchashorarios: CanchaHorario;
+
+    // Transient
+    metodoPago: string;
+
+    direccion: string;
+
+
+    @AfterLoad()
+    @AfterRecover()
+    cargarTransient(){
+        this.metodoPago = this.listasmediospagos ? this.listasmediospagos.nombre : null;
+        this.direccion = this.canchashorarios ? this.canchashorarios.direccion : null;
+    }
+
+    constructor(partial: Partial<Reserva>) {
+        Object.assign(this, partial);
+    }
+
 }

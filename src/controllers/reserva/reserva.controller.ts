@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, Post, Put } from '@nestjs/common';
+import { Body, ClassSerializerInterceptor, Controller, Get, Param, Post, Put, UseInterceptors } from '@nestjs/common';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { ReservaDto } from 'src/dtos/reserva.dto';
 import { ReservaService } from 'src/services/reserva.service';
@@ -28,6 +28,12 @@ export class ReservaController {
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.principalService.findOne(id);
+  }
+
+  @Get('misReservas/:id')
+  @UseInterceptors(ClassSerializerInterceptor)
+  findMisReservas(@Param('id') id: string) {
+    return this.principalService.findMisReservas(id);
   }
 
   @Put()
