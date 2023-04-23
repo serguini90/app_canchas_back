@@ -66,6 +66,7 @@ export class UsuarioService {
     const nuevoPayload = new JwtPayload();
     nuevoPayload.idUsuario = usuario.idUsuario;
     nuevoPayload.usuario = usuario.usuario;
+    nuevoPayload.indicadorProveedor = usuario.indicadorProveedor;
     return nuevoPayload;
   }
 
