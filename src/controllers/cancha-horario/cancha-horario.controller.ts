@@ -30,6 +30,11 @@ export class CanchaHorarioController {
     return this.principalService.findOne(id);
   }
 
+  @Get('cancha/:id')
+  findByCancha(@Param('id') id: string) {
+    return this.principalService.findByCancha(id);
+  }
+
   @Put()
   update(@Body() registro: CanchaHorarioDto) {
     return this.principalService.update(registro);

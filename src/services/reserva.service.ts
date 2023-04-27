@@ -36,7 +36,7 @@ export class ReservaService {
     return this.principalRepository.createQueryBuilder(Tabla.RESERVAS)
       .leftJoinAndMapOne(`${Tabla.RESERVAS}.${Tabla.LISTASMEDIOSPAGOS}`, ListaMedioPago, 'l1', `l1.IdLista=${Tabla.RESERVAS}.IdMedioPago`)
       .leftJoinAndMapOne(`${Tabla.RESERVAS}.${Tabla.CANCHASHORARIOS}`, CanchaHorario, 'ch', `ch.IdCanchaHorario=${Tabla.RESERVAS}.IdCanchaHorario`)
-      .leftJoinAndMapOne(`${Tabla.CANCHASHORARIOS}.${Tabla.CANCHAS}`, Cancha, 'c', `c.IdCancha=ch.IdCancha`)
+      .leftJoinAndMapOne(`ch.${Tabla.CANCHAS}`, Cancha, 'c', `c.IdCancha=ch.IdCancha`)
       .where(`${Tabla.RESERVAS}.idUsuario = :idUsuario`, { idUsuario: id})
       .andWhere(`DATE(${Tabla.RESERVAS}.fecha) >= DATE(NOW())`)
       .getMany();

@@ -31,6 +31,11 @@ export class CanchaController {
     return this.principalService.findOne(id);
   }
 
+  @Get('usuario/:id')
+  findByUsuario(@Param('id') id: string) {
+    return this.principalService.findByUsuario(id);
+  }
+
   @Put()
   update(@Body() registro: CanchaDto) {
     return this.principalService.update(registro);

@@ -1,6 +1,6 @@
 import { Exclude } from "class-transformer";
 import { Tabla } from "src/commons/tablas";
-import { AfterLoad, AfterRecover, Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { AfterLoad, AfterRecover, BeforeRecover, Column, Entity, PrimaryGeneratedColumn } from "typeorm";
 import { Cancha } from "./cancha.entity";
 
 @Entity({name:Tabla.CANCHASHORARIOS})

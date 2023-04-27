@@ -28,6 +28,10 @@ export class CanchaHorarioService {
     return this.principalRepository.findOneBy({idCanchaHorario: id});
   }
 
+  findByCancha(idCancha: string) {
+    return this.principalRepository.findBy({idCancha, indicadorHabilitado: true});
+  }
+
   update(objeto: CanchaHorarioDto) {
     return this.principalRepository.save(objeto);
   }

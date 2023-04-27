@@ -28,6 +28,10 @@ export class CanchaService {
     return this.principalRepository.findOneBy({idCancha: id});
   }
 
+  findByUsuario(idUsuario: string) {
+    return this.principalRepository.findBy({indicadorHabilitado: true, idUsuario});
+  }
+
   update(objeto: CanchaDto) {
     return this.principalRepository.save(objeto);
   }

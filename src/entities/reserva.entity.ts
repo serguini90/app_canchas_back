@@ -36,12 +36,15 @@ export class Reserva {
 
     direccion: string;
 
+    precio: number;
+
 
     @AfterLoad()
     @AfterRecover()
     cargarTransient(){
         this.metodoPago = this.listasmediospagos ? this.listasmediospagos.nombre : null;
-        this.direccion = this.canchashorarios ? this.canchashorarios.direccion : null;
+        this.direccion = (this.canchashorarios && this.canchashorarios.canchas) ? this.canchashorarios.canchas.direccion : null;
+        this.precio = (this.canchashorarios && this.canchashorarios.canchas) ? this.canchashorarios.canchas.precio : null;
     }
 
     constructor(partial: Partial<Reserva>) {
