@@ -39,6 +39,7 @@ export class ReservaService {
       .leftJoinAndMapOne(`ch.${Tabla.CANCHAS}`, Cancha, 'c', `c.IdCancha=ch.IdCancha`)
       .where(`${Tabla.RESERVAS}.idUsuario = :idUsuario`, { idUsuario: id})
       .andWhere(`DATE(${Tabla.RESERVAS}.fecha) >= DATE(NOW())`)
+      .andWhere(`${Tabla.RESERVAS}.indicadorHabilitado=1`)
       .getMany();
   }
 
