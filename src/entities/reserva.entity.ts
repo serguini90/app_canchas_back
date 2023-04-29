@@ -38,6 +38,10 @@ export class Reserva {
 
     precio: number;
 
+    horaInicio: string;
+
+    horaFin: string;
+
 
     @AfterLoad()
     @AfterRecover()
@@ -45,6 +49,8 @@ export class Reserva {
         this.metodoPago = this.listasmediospagos ? this.listasmediospagos.nombre : null;
         this.direccion = (this.canchashorarios && this.canchashorarios.canchas) ? this.canchashorarios.canchas.direccion : null;
         this.precio = (this.canchashorarios && this.canchashorarios.canchas) ? this.canchashorarios.canchas.precio : null;
+        this.horaInicio = this.canchashorarios  ? this.canchashorarios.horaInicio : null;
+        this.horaFin = this.canchashorarios ? this.canchashorarios.horaFin : null;
     }
 
     constructor(partial: Partial<Reserva>) {

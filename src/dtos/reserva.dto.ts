@@ -13,4 +13,10 @@ export class ReservaDto {
     idMedioPago: string;
     @ApiProperty()
     indicadorHabilitado: boolean;
+
+    metodoPago: string;
+    direccion: string;
+    precio: number;
+    horaInicio: string;
+    horaFin: string;
 }
