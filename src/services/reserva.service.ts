@@ -41,6 +41,7 @@ export class ReservaService {
       .where(`${Tabla.RESERVAS}.idUsuario = :idUsuario`, { idUsuario: id})
       .andWhere(`DATE(${Tabla.RESERVAS}.fecha) >= DATE(NOW())`)
       .andWhere(`${Tabla.RESERVAS}.indicadorHabilitado=1`)
+      .orderBy(`${Tabla.RESERVAS}.fecha`,'ASC')
       .getMany();
   }
 
