@@ -35,6 +35,11 @@ export class CanchaHorarioController {
     return this.principalService.findByCancha(id);
   }
 
+  @Post('cancha/:id/libre')
+  findByCanchaLibre(@Param('id') id: string, @Body() registro: any) {
+    return this.principalService.findByCanchaLibre(id, registro.fecha);
+  }
+
   @Put()
   update(@Body() registro: CanchaHorarioDto) {
     return this.principalService.update(registro);

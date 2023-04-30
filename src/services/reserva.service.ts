@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Tabla } from 'src/commons/tablas';
+import { CanchaDto } from 'src/dtos/cancha.dto';
 import { ReservaDto } from 'src/dtos/reserva.dto';
 import { CanchaHorario } from 'src/entities/cancha-horario.entity';
 import { Cancha } from 'src/entities/cancha.entity';
@@ -42,6 +43,7 @@ export class ReservaService {
       .andWhere(`${Tabla.RESERVAS}.indicadorHabilitado=1`)
       .getMany();
   }
+
 
   update(objeto: ReservaDto) {
     return this.principalRepository.save(objeto);
